@@ -1,12 +1,7 @@
-# ziglang
+# Elixir
 
-1. 包管理机制
-2. 命令源码文件
-3. 库源码文件
-4. 程序实体
-5. 链表
-6. map
-7. zig特色数据类型
-8. 函数
-9. 结构体
-10. 线程
+1. variables，what is assign, why inmutable?
+2. function，lambda, parm, body, return value, function call
+3. if expression， the pattern match
+4. the moudle
+5. spwan, process
