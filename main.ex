@@ -1,6 +1,5 @@
 defmodule Main do
     
-    
     list = [1, 2, 3, 4, 5]
     list1 = [1, 2, 3, 4, 5] ++ [1, 2]
     hd = hd(list)
@@ -11,6 +10,7 @@ defmodule Main do
     map1 = %{map | a: 3}
 
     defstruct name: "john", age: 27
+    defexception message: "default messgage"
 
     def add(a, b) do
         a + b
