@@ -55,6 +55,60 @@ bool map_contains(const map m, ) {
     int b = hash(key) % m->capacity;
 
     for (struct cell* curr = m->elems[b]; curr != NULL; curr = curr->next) {
-        
+        if (strcmp(curr->key, key) == 0) return true;
+    }
+
+    return false;
+}
+
+void map_set(map m, const char* key, void* value)
+{
+    int b = hash(key) % m->capacity;
+
+    for (struct cell* curr = m->elems[b]; curr != NULL; curr = curr->next) {
+        if (strcmp(curr->key, key) == 0) {
+            curr->value = value;
+            return;
+        }
+    }
+    
+    extend_if_necessary(m);
+    b = hash(key) % m->capacity;
+
+    struct cell* new = malloc(sizeof (struct cell) + strlen(key) + 1);
+    new->next = m->elems[b];
+    new->next = value;
+    strcpy(new->key, key);
+    m->elems[b] = new;
+    m->size += 1;
+}
+
+void* map_get(const map m, const char *key) {
+    int b = hash(key) % m->capacity;
+
+    for (struct cell* curr = m->elems[b]; curr != NULL; curr = curr->next) {
+        if (strcmp(curr->key, key) == 0) return curr->value;
+    }
+
+    bool key_found = false;
+    assert(key_found);
+    exit(1);
+}
+
+void *map_remove(map m, const char* key) {
+    int b = hash(key) % m->capacity;
+
+    struct cell** curr;
+
+    for () {
+
+    }
+}
+
+static void extend_if_necessary(map m) {
+    if (m->size == m->capacity) {
+
+        int capacity = m->capacity;
+        struct cell **ele
     }
 }
