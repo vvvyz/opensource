@@ -77,7 +77,8 @@ not unique <-> unique
 
 
 remove-complex-opera*: 通过引入临时变量来确保每个子表达式都是原子的
-+               <->  addq
+`+               <->  addq`
+
 sub-expression       atomic args
 ```racket
 (+ 10 (+ 1 2))
@@ -86,7 +87,7 @@ addq $10 %rax
 ```
 
 select-instructions: 将每个R1操作转化一系列指令
-+ <-> addq
+`+ <-> addq`
 
 
 explicate-controal: 从AST转化为控制流
