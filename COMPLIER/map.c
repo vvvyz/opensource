@@ -51,7 +51,7 @@ int map_size(const map m) {
 }
 
 //hash映射
-bool map_contains(const map m, ) {
+bool map_contains(const map m, const char* key) {
     int b = hash(key) % m->capacity;
 
     for (struct cell* curr = m->elems[b]; curr != NULL; curr = curr->next) {
@@ -109,6 +109,25 @@ static void extend_if_necessary(map m) {
     if (m->size == m->capacity) {
 
         int capacity = m->capacity;
-        struct cell **ele
+        struct cell **elems = m->elems;
+
+        m->capacity *= 2;
+        m->elems = calloc(m->capacity, sizeof (struct cell *));
+
+        for (int i = 0; i < capacity; i += 1) {
+            struct cell* curr = elems[i];
+
+            while (curr != NULL) {
+                struct cell* next = curr->next;
+
+                int b = hash(curr->key) % m->capacity;
+                curr->next = m->elems[b];
+                m->elems[b] = curr;
+
+                curr = next; 
+            }
+        }
+
+        free(elems);
     }
 }

@@ -75,7 +75,6 @@ uniquify: 重命名变量
 variables shadowing <-> register addresses
 not unique <-> unique
 
-
 remove-complex-opera*: 通过引入临时变量来确保每个子表达式都是原子的
 `+               <->  addq`
 
@@ -86,21 +85,23 @@ sub-expression       atomic args
 addq $10 %rax
 ```
 
-select-instructions: 将每个R1操作转化一系列指令
-`+ <-> addq`
-
-
 explicate-controal: 从AST转化为控制流
 两种求值顺序的不同
 left  <-> jump
 
 
-assign-home: 将变量替换成堆栈位置
+select-instructions: 将每个R1操作转化一系列指令
+`+ <-> addq`
+
+assign-home: 将变量替换成堆栈位置, 这一步可能是分配地址
 
 variables <-> register 16
 unbound <--> memory unbounded
 
+patch-instructions
+x86
 
+--------------------------------------
 此pass为每个变量提供唯一的名称, 因此variable shadowing和scope就变得不重要了。
 
 如果
