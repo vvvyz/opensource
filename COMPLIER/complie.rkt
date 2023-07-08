@@ -9,12 +9,27 @@
         (+ x y))) |#
 
 
+(define env '())
+
 (define sign 0)
+
 (define gensym
     (lambda (var)
         (set! sign (+ sign 1))
-        (cons `(var . x) '())))
+        (cons `(,var . ,sign))))
 
+(define ext-env
+    (lambda (x e env)
+        (define var (gensym x))
+        (cons `(,var . ,e) env)))
+
+
+(define lookup
+    (lambda (x env)
+        (let ([p (assq x env)]
+            (cond 
+                [(not p) #f]
+                [else (cdr p)])))))
 
 ;;--(define gensym
 ;;--    (fun ([:var Int] [-> pair])

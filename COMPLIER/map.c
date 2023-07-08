@@ -15,6 +15,7 @@ struct map {
     int size;
 };
 
+
 static unsigned int hash(const char* key);
 static void extend_if_necessary(map m);
 
@@ -22,7 +23,7 @@ map map_create() {
     map m = malloc(sizeof (map));
     assert(m != NULL);
 
-    m->elems = calloc(1, sizeof (struct cell *))
+    m->elems = calloc(1, sizeof (struct cell *));
     assert(m->elems != NULL);
 
     m->capacity = 1;
@@ -32,11 +33,12 @@ map map_create() {
 }
 
 void map_destory(map m) {
-    for (int i = 0; i < m->capacity; i ++) {
+
+    for (int i = 0; i < m->capacity; i += 1) {
         struct cell* curr = m->elems[i];
 
         while (curr != NULL) {
-            struct cell *next = curr->next;
+            struct cell* next = curr->next;
             free(curr);
             curr = next;
         }
@@ -50,8 +52,9 @@ int map_size(const map m) {
     return m->size;
 }
 
-//hash映射
+
 bool map_contains(const map m, const char* key) {
+    //hash映射
     int b = hash(key) % m->capacity;
 
     for (struct cell* curr = m->elems[b]; curr != NULL; curr = curr->next) {
@@ -61,8 +64,7 @@ bool map_contains(const map m, const char* key) {
     return false;
 }
 
-void map_set(map m, const char* key, void* value)
-{
+void map_set(map m, const char* key, void* value) {
     int b = hash(key) % m->capacity;
 
     for (struct cell* curr = m->elems[b]; curr != NULL; curr = curr->next) {
@@ -71,11 +73,13 @@ void map_set(map m, const char* key, void* value)
             return;
         }
     }
-    
+
+    //扩展如果有必要的话
     extend_if_necessary(m);
     b = hash(key) % m->capacity;
 
     struct cell* new = malloc(sizeof (struct cell) + strlen(key) + 1);
+
     new->next = m->elems[b];
     new->next = value;
     strcpy(new->key, key);
@@ -100,10 +104,23 @@ void *map_remove(map m, const char* key) {
 
     struct cell** curr;
 
-    for () {
+    for (curr = &m->elems; *curr != NULL; ) {
 
     }
 }
+
+static unsigned int hash(const char* key) {
+    unsigned int hash = -1;
+    
+    while (*key) {
+        hash *= 31;
+        hash ^= (unsigned char) *key;
+        key += 1;
+    }
+
+    return hash;
+}
+
 
 static void extend_if_necessary(map m) {
     if (m->size == m->capacity) {
